@@ -15,8 +15,8 @@ section .code
 
 ; Set video mode
 setVideo:
-mov ah, 0		; 320x200 256 color graphics (MCGA,VGA)
-mov al, 13h
+mov ah, 0		; 80x25 16 color text (CGA,EGA,MCGA,VGA)
+mov al, 3
 int 10h
 
 ; Get maximum columns
@@ -40,7 +40,7 @@ writeChar:
 mov ah, 0xe
 mov al, [char]
 mov bh, 0
-mov bl, 2
+mov bl, 0xf
 int 10h
 
 jmp readChar
