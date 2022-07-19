@@ -10,6 +10,8 @@ column resb 4
 char resb 1
 maxColumns resb 4
 lastColumn resb 4
+rowForCheck resb 4
+columnForCheck resb 4
 
 section .code
 
@@ -51,6 +53,8 @@ call getPosition
 mov [row], dh
 mov [column], dl
 mov [lastColumn], dl
+mov [columnForCheck], dl
+mov [rowForCheck], dh
 mov ah, 2
 mov bh, 0
 mov dh, [row]
@@ -86,13 +90,18 @@ goPrevLine:
 call getPosition
 cmp dh, 0
 jle readChar
+mov ah, [rowForCheck]
+sub dh, ah
+cmp dh, 1
+jng .notGreater
+mov ah, [maxColumns]
+mov [lastColumn], ah
+.notGreater:
 mov ah, 2
 mov bh, 0
 dec dh
 mov dl, [lastColumn]
 int 10h
-mov ah, [maxColumns]
-mov [lastColumn], ah
 jmp readChar
 
 ; Get current cursor position FUNCTION
