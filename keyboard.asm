@@ -17,8 +17,8 @@ section .code
 
 ; Set video mode
 setVideo:
-mov ah, 0		; 80x25 16 color text (CGA,EGA,MCGA,VGA)
-mov al, 3
+mov ah, 0		; 40x25 B/W text (CGA,EGA,MCGA,VGA)
+mov al, 0
 int 10h
 
 ; Get maximum columns
