@@ -99,6 +99,7 @@ mov [lastColumn], ah
 .notGreater:
 mov ah, 2
 mov bh, 0
+add dh, [rowForCheck]
 dec dh
 mov dl, [lastColumn]
 int 10h
