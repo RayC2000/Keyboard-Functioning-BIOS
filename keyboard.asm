@@ -1,3 +1,6 @@
+bits 16
+org 0x7c00
+
 section .data
 
 
@@ -6,7 +9,7 @@ row resb 4
 column resb 4
 char resb 1
 maxColumns resb 4
-
+lastColumn resb 4
 
 section .code
 
@@ -47,6 +50,7 @@ newLine:
 call getPosition
 mov [row], dh
 mov [column], dl
+mov [lastColumn], dl
 mov ah, 2
 mov bh, 0
 mov dh, [row]
@@ -85,8 +89,10 @@ jle readChar
 mov ah, 2
 mov bh, 0
 dec dh
-mov dl, [maxColumns]
+mov dl, [lastColumn]
 int 10h
+mov ah, [maxColumns]
+mov [lastColumn], ah
 jmp readChar
 
 ; Get current cursor position FUNCTION
