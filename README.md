@@ -1,1 +1,1 @@
-This Assembly script is a keyboard functioning BIOS
+This Assembly script is a keyboard functioning bootloader
